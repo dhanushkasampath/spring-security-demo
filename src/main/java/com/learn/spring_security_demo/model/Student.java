@@ -1,4 +1,4 @@
-package com.learn.spring_security_demo.dto;
+package com.learn.spring_security_demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
