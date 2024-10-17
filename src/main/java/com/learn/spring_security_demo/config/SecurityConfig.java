@@ -68,6 +68,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user1, user2);
     }
 
+    // above userDetailsService bean is overridden by below authenticationProvider bean which provide
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
