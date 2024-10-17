@@ -1,5 +1,7 @@
 package com.learn.spring_security_demo.config;
 
+import com.learn.spring_security_demo.service.MyUserDetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,7 +19,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final MyUserDetailService myUserDetailService;
 
     // This bean says to spring. Hey.. don't go for default security filter chain. instead go through this flow.
     @Bean
@@ -67,7 +72,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());//saying that we no need want the default password encoder
-        provider.setUserDetailsService();//we need to provide our own implementation
+        provider.setUserDetailsService(myUserDetailService);//we need to provide our own implementation
         return provider;
 
     }
