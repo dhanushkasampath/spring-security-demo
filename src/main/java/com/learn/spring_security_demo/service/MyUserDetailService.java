@@ -1,6 +1,6 @@
 package com.learn.spring_security_demo.service;
 
-import com.learn.spring_security_demo.entity.User;
+import com.learn.spring_security_demo.entity.Users;
 import com.learn.spring_security_demo.model.UserPrincipal;
 import com.learn.spring_security_demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,9 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username);
+        Users users = userRepository.findByUsername(username);
 
-        if(user == null){
+        if(users == null){
             System.out.println("User Not Found");
             throw new UsernameNotFoundException("User Not Found");
         }
@@ -33,6 +33,6 @@ public class MyUserDetailService implements UserDetailsService {
        // Ideal way is create a new class. 'Keep in mind this is one time setup'
 //        Lets create a class in model as UserPrincipal
 //        In terms of spring security, UserPrincipal refers to the current user who is trying to login
-        return new UserPrincipal(user);
+        return new UserPrincipal(users);
     }
 }

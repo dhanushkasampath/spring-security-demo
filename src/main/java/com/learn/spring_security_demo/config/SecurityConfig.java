@@ -74,6 +74,5 @@ public class SecurityConfig {
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());//saying that we no need want the default password encoder
         provider.setUserDetailsService(myUserDetailService);//we need to provide our own implementation
         return provider;
-
     }
 }

@@ -1,7 +1,6 @@
 package com.learn.spring_security_demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +11,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+@Table
+public class Users {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String username;
+
+    @Column
     private String password;
 }

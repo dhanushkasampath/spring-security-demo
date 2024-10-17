@@ -1,6 +1,6 @@
 package com.learn.spring_security_demo.model;
 
-import com.learn.spring_security_demo.entity.User;
+import com.learn.spring_security_demo.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +11,10 @@ import java.util.Collections;
 // Once we implement UserDetails, we can see there are lot of methods we have to implement.
 public class UserPrincipal implements UserDetails {
 
-    private User user;
+    private Users users;
 
-    public UserPrincipal(User user) {
-        this.user = user;
+    public UserPrincipal(Users users) {
+        this.users = users;
     }
 
     // note that one user can have multiple roles
@@ -25,12 +25,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return users.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return users.getUsername();
     }
 
     @Override
