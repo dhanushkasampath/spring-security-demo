@@ -13,14 +13,16 @@ public class UserController {
 
     private final UserService userService;
 
+    // we should be able to call this endpoint without entering credentials
     @PostMapping("/register")
     public Users register(@RequestBody Users users){
         return userService.register(users);
     }
 
+    // we should be able to call this endpoint without entering credentials
     @PostMapping("/user-login")
     public String login(@RequestBody Users users){
-        return "HELLOW";
-//        return userService.verify(users);
+        System.out.println(users);
+        return userService.verify(users);
     }
 }
