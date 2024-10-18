@@ -39,7 +39,10 @@ public class SecurityConfig {
 
           return httpSecurity
                   .csrf(customizer ->customizer.disable())
-                  .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
+                  .authorizeHttpRequests(requests -> requests
+                          .requestMatchers("user-login", "register")
+                          .permitAll()
+                          .anyRequest().authenticated())
                   .formLogin(Customizer.withDefaults())
                   .httpBasic(Customizer.withDefaults())
                   .sessionManagement(session ->
