@@ -41,7 +41,7 @@ public class SecurityConfig {
                   .csrf(customizer ->customizer.disable())
                   .authorizeHttpRequests(requests -> requests
                           .requestMatchers("user-login", "register")
-                          .permitAll()
+                          .permitAll()// allow to access above endpoints without spring-security
                           .anyRequest().authenticated())
                   .formLogin(Customizer.withDefaults())
                   .httpBasic(Customizer.withDefaults())
