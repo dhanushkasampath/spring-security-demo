@@ -17,6 +17,8 @@ public class UserService {
 
     private final AuthenticationManager authenticationManager;
 
+    private final JwtService jwtService;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
     public Users register(Users users){
@@ -34,11 +36,12 @@ public class UserService {
         // using the authenticationManager, we can authenticate. But how? and what?
 
         // What you are passing to 'authenticate()' method is unauthenticated. What you are getting is authenticated
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
 
         //now we can verify user is authenticated or not.
         if(authentication.isAuthenticated()){
-            return "Success";
+            return jwtService.generateToken(users.getUsername());
         }
         return "Fail";
     }
