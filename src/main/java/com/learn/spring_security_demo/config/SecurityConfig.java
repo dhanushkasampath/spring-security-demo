@@ -16,9 +16,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +26,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final MyUserDetailService myUserDetailService;
+    private final JwtFilter jwtFilter;
 
     // This bean says to spring. Hey.. don't go for default security filter chain. instead go through this flow.
     @Bean
@@ -49,6 +50,7 @@ public class SecurityConfig {
                   .httpBasic(Customizer.withDefaults())
                   .sessionManagement(session ->
                           session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                  .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                   .build();
     }
 
